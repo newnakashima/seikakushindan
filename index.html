@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+  <title>性格診断プログラム</title>
+</head>
+<body>
+  <section class="section">
+    <div class="container">
+      <h1 class="title">性格診断プログラム</h1>
+      <p>--------------------</p>
+      <div class="columns">
+        <div class="column is-half">
+          <label class="label">1. 自分をどのように表現することが多いですか？ (楽観的、内向的、冷静など)</label>
+          <div class="control">
+            <input class="input" type="text" id="answer1">
+          </div>
+        </div>
+        <div class="column is-half">
+          <label class="label">2. 休日に好きなことは何ですか？</label>
+          <div class="control">
+            <input class="input" type="text" id="answer2">
+          </div>
+        </div>
+      </div>
+      <div class="columns">
+        <div class="column is-half">
+          <label class="label">3. ストレスがたまったらどうしますか？ (散歩する、友達と話す、ゲームするなど)</label>
+          <div class="control">
+            <input class="input" type="text" id="answer3">
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <div class="control">
+          <button class="button is-primary" id="diagnoseButton">診断する</button>
+        </div>
+      </div>
+      <p id="result" class="mt-4"></p>
+    </div>
+  </section>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const diagnoseButton = document.getElementById("diagnoseButton");
+      const resultElement = document.getElementById("result");
+
+      diagnoseButton.addEventListener("click", function() {
+        const answer1 = document.getElementById("answer1").value;
+        const answer2 = document.getElementById("answer2").value;
+        const answer3 = document.getElementById("answer3").value;
+
+        const personality = diagnosePersonality(answer1, answer2, answer3);
+
+        resultElement.textContent = "あなたの性格診断結果: " + personality;
+      });
+
+      function diagnosePersonality(answer1, answer2, answer3) {
+        if (answer1.toLowerCase().includes("楽観的") && answer2.toLowerCase().includes("旅行") && answer3.toLowerCase().includes("散歩")) {
+          return "あなたは楽観的で冒険心旺盛な性格です！";
+        } else if (answer1.toLowerCase().includes("内向的") && answer2.toLowerCase().includes("読書") && answer3.toLowerCase().includes("友達と話す")) {
+          return "あなたは内向的で知識欲が旺盛な性格です！";
+        } else {
+          return "あなたの性格は難しいですね。もっと質問してみてください。";
+        }
+      }
+    });
+  </script>
+</body>
+</html>

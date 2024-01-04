@@ -11,23 +11,29 @@ console.log("--------------------");
 rl.question("1. 自分をどのように表現することが多いですか？ (楽観的、内向的、冷静など) ", (answer1) => {
   rl.question("2. 休日に好きなことは何ですか？ ", (answer2) => {
     rl.question("3. ストレスがたまったらどうしますか？ (散歩する、友達と話す、ゲームするなど) ", (answer3) => {
-      // ここでユーザーの回答をもとに性格を診断
-      const personality = diagnosePersonality(answer1, answer2, answer3);
-      console.log("--------------------");
-      console.log("あなたの性格診断結果: " + personality);
-      rl.close();
+      rl.question("4. ４問目 ", (answer4) => {
+        // ここでユーザーの回答をもとに性格を診断
+        const personality = diagnosePersonality(answer1, answer2, answer3, answer4);
+        console.log("--------------------");
+        console.log("あなたの性格診断結果: " + personality);
+        rl.close();
+      });
     });
   });
 });
 
 // ユーザーの回答に基づいて性格を診断する関数
-function diagnosePersonality(answer1, answer2, answer3) {
+function diagnosePersonality(answer1, answer2, answer3, answer4) {
   // ここで回答に応じた性格を診断し、適切なメッセージを返すロジックを記述します
   // この例では簡単な診断ロジックを示していますが、実際の診断はもっと複雑で詳細になります
-  if (answer1.toLowerCase().includes("楽観的") && answer2.toLowerCase().includes("旅行") && answer3.toLowerCase().includes("散歩")) {
+  if (answer1.toLowerCase().includes("楽観的")) {
     return "あなたは楽観的で冒険心旺盛な性格です！";
-  } else if (answer1.toLowerCase().includes("内向的") && answer2.toLowerCase().includes("読書") && answer3.toLowerCase().includes("友達と話す")) {
+  } else if (answer2.toLowerCase().includes("読書")) {
     return "あなたは内向的で知識欲が旺盛な性格です！";
+  } else if (answer3.toLowerCase().includes("ゲーム")) {
+    return "あなたはゲームが好きな性格です！";
+  } else if (answer4.toLowerCase().includes("4")) {
+    return "あなたは4が好きな性格です！";
   } else {
     return "あなたの性格は難しいですね。もっと質問してみてください。";
   }
